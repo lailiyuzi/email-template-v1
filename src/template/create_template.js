@@ -1,29 +1,48 @@
-import React from "react";
-import { Card } from 'primereact/card';
+import {React, useState} from 'react';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import './create.css';
+import { InputText } from 'primereact/inputtext';
+import 'primeicons/primeicons.css';
+ 
 
 
-const Create = () => {
+function Create() {
+  const [value1, setValue1] = useState('');
+
+  
   return (
-              <div className="slider-thumb">
+    <div className='container'>
+      <Card>
+      <Card.Header style={{background: '#bb0000ff',color: '#FFFFFF' }}>Create</Card.Header>
 
-                <div className="Container">
+      <div className='title'>
+      <h6 style={{margin: '20px'}}>Title</h6>
+                <InputText style={{height: '18px', width: '428px', margin: '20px'}} value={value1} onChange={(e) => setValue1(e.target.value)} />
+                {/* <span className="ml-2">{value1}</span> */}
+        
+      </div>
+      <Card.Body>
+        <Card.Text>
+          With supporting text below as a natural lead-in to additional content.
+        </Card.Text>
+        
+      </Card.Body>
 
-                <h5>Create</h5>
-                 <Card title="Simple Card" style={{ width: '25rem', marginBottom: '2em' }}>
-               
-                <p className="m-0" style={{lineHeight: '1.5'}}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-               
-              </Card>
+      <Card.Footer>
+          
 
-                </div>
-              
-              </div>
-              
-            
-           
+          <i className="pi pi-download"></i>
+             <Button variant="outline-danger">Save as Draft</Button>{' '}
+            <Button variant="danger">Save & View</Button>{' '}
+          
+
+      </Card.Footer>
+
+    </Card>
+
+    </div>
+    
   );
 }
 

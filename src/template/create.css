@@ -1,6 +1,6 @@
 body {
   height: 100vh;
-   background: linear-gradient(90deg,#d48da7,#ff8a00);
+   background: #cfc7c7;
 
 }
 
@@ -40,25 +40,54 @@ body {
 
 /* dialog-header */
 
-.h5{
+.h6{
 
 left: 7.5%;
 right: 7.57%;
 top: 28.61%;
 bottom: 65.43%;
 
-background: #6C757D;
+background: #000000;
 border-radius: 10px 10px 0px 0px;
-border-style: dotted;
 }
 
 .container{
 
-justify-content: center;
-margin: 25px;
-width: 350px;
-height: 200px;
-outline: dashed 1px black;
-/* Setup */
-position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.Card{
+  width: 1223px;
+height: 653px;
+left: 108px;
+top: 293px;
+}
+
+.Card.Footer{
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;  
+
+}
+
+.pi {
+   font-size: 1.5em;
+   margin-left:285px;
+   margin-right:10px;
+   vertical-align: middle;
+}
+
+.btn{
+  font-size: 0.8rem;
 }
