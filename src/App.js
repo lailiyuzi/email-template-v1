@@ -7,12 +7,11 @@ import {Create} from './template';
 import {Table} from './History';
 
 
-
 function App() {
   return (
     <div>
      <Create />
-     <Table/>
+     <Table />
     </div>
   );
 }

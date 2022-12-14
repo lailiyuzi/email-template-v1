@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './ProductService';
-import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
+import {Button} from 'primereact/button';
+
 import './table.css';
 
 const Table = () => {
@@ -15,31 +15,33 @@ const Table = () => {
         productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    const formatDate = (value) => {
+        return value;
     }
 
-    const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+    const actionTemplate = (rowData, Column) => {
+        console.log('column', Column);
+        console.log('rowData', rowData);
+        return (<div>
+          <Button label="Edit" className="p-button-success"  />
+          <Button label="Delete" className="p-button-warning" />
+        </div>);
+      };
+
+    const dateBodyTemplate = (rowData) => {
+        return formatDate(rowData.date);
     }
 
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    }
-
-    const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readOnly cancel={false} />;
-    }
-
+   
     const statusBodyTemplate = (rowData) => {
-        return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
+        return <Button className={`product-badge status-${rowData.status}`}>{rowData.status.toLowerCase()}</Button>;
     }
+
 
     const header = (
         <div className="table-header">
             History
-            <Button icon="pi pi-refresh" />
-        </div>
+       </div>
     );
     const footer = `In total there are ${products ? products.length : 0} products.`;
 
@@ -47,12 +49,18 @@ const Table = () => {
         <div className="datatable-templating-demo">
             <div className="card">
                 <DataTable value={products} header={header} footer={footer} responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate}></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate}></Column>
-                    <Column header="Status" body={statusBodyTemplate}></Column>
+                {/* Date */}
+                    <Column field="date" header="Date" body={dateBodyTemplate}></Column>
+                {/* Title */}
+                    <Column field="title" header="Title"></Column>
+                {/* Status */}
+                    <Column header="Status" body={statusBodyTemplate} style={{font:'13px',margin:'10px'}} ></Column>
+                   
+                {/* Action */}
+                <Column rowEditor bodyStyle={{ textAlign: 'center' }}></Column>
+                     <Column body={actionTemplate} header="Actions" />
+
+                    
                 </DataTable>
             </div>
         </div>

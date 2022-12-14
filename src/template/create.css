@@ -89,5 +89,14 @@ top: 293px;
 }
 
 .btn{
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+}
+
+.p-button{
+
+  display: flex;
+  flex-direction: row;
+  padding:0.2rem 1rem;
+  margin: 5px;
+  display:inline-block;
 }
