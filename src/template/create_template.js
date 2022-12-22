@@ -4,13 +4,13 @@ import Card from 'react-bootstrap/Card';
 import './create.css';
 import { InputText } from 'primereact/inputtext';
 import 'primeicons/primeicons.css';
- 
-
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import EditorConvertToJSON from './editor';
 
 function Create() {
   const [value1, setValue1] = useState('');
 
-  
+
   return (
     <div className='container'>
       <Card>
@@ -26,6 +26,9 @@ function Create() {
         <Card.Text>
           With supporting text below as a natural lead-in to additional content.
         </Card.Text>
+
+        <EditorConvertToJSON />
+
         
       </Card.Body>
 
