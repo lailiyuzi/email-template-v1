@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
+import { Card } from 'primereact/card';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertFromRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
@@ -63,7 +64,16 @@ class EditorConvertToJSON extends Component {
 
     return (
       <div>
+
+        <Fragment>
+
+        <Card style={{minHeight:"320px"}}>
         <Editor toolbarClassName="toolbarClassName" wrapperClassName="wrapperClassName"  editorClassName="editorClassName" onContentStateChange={this.onContentStateChangeJSon} mention={{ separator: ' ', trigger: '@', suggestions: [ { text: 'APPLE', value: 'apple', url: 'apple' },{ text: 'BANANA', value: 'banana', url: 'banana' },{ text: 'CHERRY', value: 'cherry', url: 'cherry' },{ text: 'DURIAN', value: 'durian', url: 'durian' },{ text: 'EGGFRUIT', value: 'eggfruit', url: 'eggfruit' },{ text: 'FIG', value: 'fig', url: 'fig' },{ text: 'GRAPEFRUIT', value: 'grapefruit', url: 'grapefruit' },{ text: 'HONEYDEW', value: 'honeydew', url: 'honeydew' },],}} editorState={editorState} onEditorStateChange={this.onEditorStateChange}  />
+        </Card>        
+        
+        
+        </Fragment>
+      <br />
         
 
       <p><textarea disabled value={JSON.stringify(contentState1, null, 4)} /></p>

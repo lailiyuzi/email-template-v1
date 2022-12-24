@@ -1,6 +1,6 @@
 body {
   height: 100vh;
-   background: #cfc7c7;
+   background: white;
 
 }
 
@@ -46,9 +46,11 @@ left: 7.5%;
 right: 7.57%;
 top: 28.61%;
 bottom: 65.43%;
-
+vertical-align: middle;
+padding-top: 8px;
 background: #000000;
 border-radius: 10px 10px 0px 0px;
+margin: 20px;
 }
 
 .container{
@@ -68,28 +70,40 @@ border-radius: 10px 10px 0px 0px;
 }
 
 .Card{
-  width: 1223px;
+width: 1223px;
 height: 653px;
 left: 108px;
 top: 293px;
 }
 
-.Card.Footer{
+
+.card-header{
+  padding: 10px;
+  font-weight: 700;
+  background: #DC2626;
+  color: #ffffff;
+  border-color: #DC2626;
+}
+
+.card-footer{
   display: flex;
   flex-direction: row;
-  align-self: flex-end;  
-
+  vertical-align:middle; 
+  background-color: #f8f9fa;
+  justify-content: end;
 }
+
 
 .pi {
    font-size: 1.5em;
-   margin-left:285px;
-   margin-right:10px;
-   vertical-align: middle;
+   align-items: flex-end;
+   vertical-align:middle;
+   padding-top: 10px;
+   
 }
 
 .btn{
-  font-size: 0.7rem;
+  font-size: 0.2rem;
 }
 
 .p-button{
@@ -99,4 +113,15 @@ top: 293px;
   padding:0.2rem 1rem;
   margin: 5px;
   display:inline-block;
+  
 }
+
+.p-button.p-button-warning, .p-buttonset.p-button-warning > .p-button, .p-splitbutton.p-button-warning > .p-button, .p-button-warning {
+  font-size: small;
+  justify-items: flex-end;
+}
+
+.card{
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);}
+
+
