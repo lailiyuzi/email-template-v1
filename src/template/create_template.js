@@ -46,10 +46,9 @@ function Create() {
       <Card.Header style={{background: '#bb0000ff',color: '#FFFFFF' }}>Create</Card.Header>
 
       <div className='title'>
-      <h6>Title</h6>
+      <h6 className='titleStyle'>Title</h6>
                 
                 <Controller name="title" control={control}  placeholder="title" render={({ field, fieldState }) => (<InputText style={{height: '35px', width: '-webkit-fill-available', margin: '20px'}} id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />)} />
-        
       </div>
       <Card.Body>
         
@@ -62,7 +61,8 @@ function Create() {
       <Card.Footer>
           
 
-            <i className="pi pi-download"></i>
+            <Button icon="pi pi-download" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
+
              <Button label="Save as Draft" className="p-button-raised p-button-danger p-button-text" />
              <Button label="Save & View" className="p-button-danger" />
           
