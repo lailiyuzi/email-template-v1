@@ -12,12 +12,12 @@ function Home() {
   const [ispost, setpost] = useState([]);
   const viewPost = async() =>{
     try {
-      // await axios.get(`http://localhost:5000/users`,)
-      // .then(res => { 
-      //   if(res.data.success === true){
-      //     setpost(res.data.listall);
-      //   }
-      // })
+      await axios.get(`http://localhost:5000/users`,)
+      .then(res => { 
+        if(res.data.success === true){
+          setpost(res.data);
+        }
+      })
     } catch (error) { throw error;}
   }
  

@@ -8,7 +8,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import './App.css';
 
 
-import {Add,Edit,Home} from "./components";
+import {Add,Edit,Home, PostList,View, EditPosting} from "./components";
 function App() {
   return (
     <div>
@@ -16,7 +16,14 @@ function App() {
       <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/Add" element={<Add />} />
-          <Route path="/Edit/:postID" element={<Edit />}/>
+          <Route path="/Edit/:id" element={<Edit />}/>
+          <Route path="/PostList" element={<PostList />}/>
+          <Route path="/View" element={<View />}/>
+          <Route path="/View/Edit/:id" element={<Edit />}/>
+
+          <Route path="/EditPosting/:id" element={<EditPosting />}/>
+
+
       </Routes>
       </Router>
     </div>

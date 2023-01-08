@@ -84,6 +84,7 @@ label {
   margin: 37px 0 17px 0;
   border-bottom: 1px solid lavender;
   padding-bottom: 17px;
+  padding: 0px 15px 17px 23px;
 }
 .post__list h2 {
   margin-bottom: 17px;
@@ -122,3 +123,4 @@ form.update__forms {
   height: auto;
   margin-left: 30%;
 }
+

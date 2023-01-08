@@ -1,30 +1,30 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import Editpost from './Editpost';
+import { useParams } from 'react-router-dom';
+
 
 const Edit = (props) => {
+
+  const { id } = useParams();
+
   useEffect(() => {
-    viewPostId(props.match.params.postID);
+    viewPostId();
   }, []);
         
   const [ispostId, setpostId] = useState([]);
-  const viewPostId = async(ids) =>{
-    try {
-      // await axios.post(`http://localhost:5000/getPostId`,{
-      //   ids: props.match.params.postID
-      // })
-      // .then(res => {
-      //   if(res.data.success === true){
-      //     setpostId(res.data.listId);
-      //   }
-      // })
-    } catch (error) { throw error;}
-  }
+
+  const viewPostId = async() =>{
+      const response = await axios.get(`http://localhost:5000/users/${id}`);
+      setpostId(response.data)
+      console.log(response.data)
+    } 
+  
         
 return (
 <>
   {ispostId.length > 0 ? <>    
-    <Editpost postList={ispostId}  editPostID={props.match.params.postID} />      
+    <Editpost postList={ispostId}  editPostID={ispostId.id} />      
   </> : null }
 
 </>

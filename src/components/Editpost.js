@@ -7,8 +7,9 @@ import axios from 'axios';
 
 function Editpost(props) {
   let history = useNavigate();
+  console.log(props.ispostId[0].title)
   const [userInfo, setuserInfo] = useState({
-    title: props.postList[0].title,
+    title: props.ispostId[0].title,
   });
   const onChangeValue = (e) => {
     setuserInfo({
@@ -18,7 +19,7 @@ function Editpost(props) {
   } 
   let editorState = EditorState.createWithContent(
   ContentState.createFromBlockArray(
-    convertFromHTML(props.postList[0].description)
+    convertFromHTML(props.ispostId[0].description)
   ));
   const [description, setDescription] = useState(editorState);
 
@@ -26,27 +27,30 @@ function Editpost(props) {
     setDescription(editorState);
   }
 
-  const [isError, setError] = useState(null);
+
   const PoemAddbooks = async (event) => {
-    try {
       event.preventDefault();
       event.persist();
-      if(userInfo.description.value.length < 50){
-        setError('Required, Add description Minimum length 50 characters');
-        return;
-      }
-      axios.post(`http://localhost:5000/editArticle`, {
+      const results = {
         title: userInfo.title,
-        description: userInfo.description.value,
-        ids:props.editPostID
-      })
-      .then(res => { // then print response status
-        if(res.data.success === true){
-          history.push('/');
-        }
-      })
-    } catch (error) { throw error;}    
+        description: userInfo.description }
+
+      try {
+        axios.post('http://localhost:5000/users', results).then(res => {
+          if(res.success === true){
+            // history('/PostList');
+          }
+        }).then((res) => {
+          console.log("success");
+        });
+      }
+       catch (error) {
+        console.log(error);
+      }
+
   }
+
+  
 return (
 <div className="App">
   <div className="container">
@@ -69,7 +73,6 @@ return (
             />
             <textarea style={{display:'none'}} disabled ref={(val) => userInfo.description = val} value={draftToHtml(convertToRaw(description.getCurrentContent())) } />
           </div>
-          {isError !== null && <div className="errors"> {isError} </div>}
           <div className="form-group col-sm-12 text-right">
             <button type="submit" className="btn btn__theme"> Submit  </button>
           </div> 
