@@ -5,10 +5,11 @@ import 'primereact/resources/primereact.min.css';
 import 'draft-js/dist/Draft.css';
 import "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import 'draft-js-import-markdown';
 import './App.css';
 
 
-import {Add,Edit,Home, PostList,View, EditPosting} from "./components";
+import {Add,Edit,Home, PostList,View} from "./components";
 function App() {
   return (
     <div>
@@ -19,9 +20,9 @@ function App() {
           <Route path="/Edit/:id" element={<Edit />}/>
           <Route path="/PostList" element={<PostList />}/>
           <Route path="/View" element={<View />}/>
-          <Route path="/View/Edit/:id" element={<Edit />}/>
+          {/* <Route path="/View/Edit/:id" element={<Edit />}/> */}
 
-          <Route path="/EditPosting/:id" element={<EditPosting />}/>
+          {/* <Route path="/EditPosting/:id" element={<EditPosting />}/> */}
 
 
       </Routes>

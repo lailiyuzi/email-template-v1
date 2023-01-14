@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card } from 'primereact/card';
-import { convertFromHTML } from 'draft-js';
 
 
 const View = () => {

@@ -88,8 +88,9 @@ label {
 }
 .post__list h2 {
   margin-bottom: 17px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
+  color: #000;
 }
 .post__list p {
   margin-bottom: 17px;

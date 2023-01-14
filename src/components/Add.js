@@ -51,7 +51,6 @@ const Add = () => {
   }
 
   
-
   const addDetails = async (event) => {
     event.preventDefault();
     event.persist();
@@ -93,11 +92,11 @@ return (
       <div className="container">
       <div className="row"> 
       
-      <div className="cursor-pointer flex align-items-end">
+      {/* <div className="cursor-pointer flex align-items-end">
         
-      <img src="https://codebridge.my/static/media/cb-logo.3d7cfc27.svg" height="30" class="mb-1" />
-      <h3 className="text-header">CodeBridge<span class="text-sm ml-1">studio</span></h3>
-      </div>
+      <img src="https://codebridge.my/static/media/cb-logo.3d7cfc27.svg" height="30" className="mb-1" />
+      <h3 className="text-header">CodeBridge<span className="text-sm ml-1">studio</span></h3>
+      </div> */}
 
       <Card style={{minHeight:"320px"}}>
         <form onSubmit={addDetails} className="update__forms">
@@ -142,10 +141,10 @@ return (
 
           
         <div className="form-group col-sm-12 text-right">
-        <div className='footer'>        
+        <div className='footer-editor'>        
            <Button icon="pi pi-download" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
            <Button label="Save as Draft" className="p-button-raised p-button-danger p-button-text" />
-           <Link to="/View" type="submit"><Button label="Save & View" className="p-button-danger" /> </Link>
+           <Link to="/View"><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
         </div>
         </div>  
 

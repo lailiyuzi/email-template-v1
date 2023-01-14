@@ -8,12 +8,13 @@ a {
         height: 120px;
     }
 
-    .footer{
+    .footer-editor{
         display: flex;
         flex-direction: row;
         vertical-align:middle; 
         background-color: #f8f9fa;
         justify-content: end;
+        padding-top: 10px;
       }
 
       .p-button{
