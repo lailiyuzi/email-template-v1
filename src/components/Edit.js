@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import Editpost from './Editpost';
 import { useParams } from "react-router-dom";
+import EditPosting from './EditPosting';
+
 
 
 
@@ -15,17 +17,9 @@ const Edit = () => {
     }, []);
         
   const [ispostId, setpostId] = useState([]);
-  const [title, setTitle] = useState([]);
-  const [description, setDescription] = useState([]);
-  console.log(typeof title)
-  console.log(title)
-  console.log(typeof description)
-  console.log(description)
-
-  // const sendPost=JSON.stringify(ispostId)
-  // console.log("changeTo")
-  // console.log(sendPost)
-  // console.log(typeof sendPost)
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+ 
 
 
 
@@ -43,8 +37,8 @@ const Edit = () => {
         
 return (
 <>
-    <Editpost sendTitle={title} sendDescription={description} editPostID={id} />      
-    
+    <EditPosting sendTitle={title} sendDescription={description} editPostID={id} />      
+  
 </>
 )
 }

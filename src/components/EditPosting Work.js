@@ -18,9 +18,7 @@ class EditPosting extends Component {
     super(props);
 
     this.state = {editorState: EditorState.createEmpty(),
-                  title: props.sendTitle,
-                  description: ""
-                }
+                  title: props.sendTitle}
 
   }
 
@@ -28,44 +26,33 @@ class EditPosting extends Component {
     if (this.props.sendDescription !== prevProps.sendDescription) {
         this.setState({
                 editorState: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(this.props.sendDescription))),
-                title: this.props.sendTitle,
-                           
+                title: this.props.sendTitle
         });
     }
-}
-
-
-onChange = (e) =>{
-  this.setState({title: e.target.value});
 }
 
 onEditorStateChange = (editorState) => {
     this.setState({editorState})
 };
 
-onContentStateChange = (contentState) => {
-  this.setState({
-    contentState,
-  });
-};
+onChange = (e) =>{
+  this.setState({name: e.target.value});
+}
 
 updateDetails = async (e) => {
   e.preventDefault();
   e.persist();
   console.log({
-    title: this.state.title,
-    description: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+    title: this.title,
+    description: this.editorState,
   })
   const results = {
-    title: this.state.title,
-    description: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+    title: this.title,
+    description: this.editorState,
   }
-  const id = this.props.editPostID;
-  console.log(results)
-  console.log(this.props.editPostID)
 
     try {
-      axios.patch(`http://localhost:5000/users/${id}`, results).then(res => {
+      axios.patch(`http://localhost:5000/users/${this.props.editPostId}`, results).then(res => {
         if(res.success === true){
           console.log("success");
         }
@@ -106,25 +93,24 @@ updateDetails = async (e) => {
                   wrapperClassName="demo-wrapper"
                   editorClassName="demo-editor"
                   onEditorStateChange={this.onEditorStateChange}
-                  onContentStateChange={this.onContentStateChange}
                 />
 
-                <textarea style={{display:'none'}} disabled ref={(val) => this.description = val} value={draftToHtml(editorState.getCurrentContent()) } />
+                {/* <textarea style={{display:'none'}} disabled ref={(val) => userInfo.description = val} value={draftToHtml(convertToRaw(description.getCurrentContent())) } /> */}
                 </Card>
               </div>
               <br />
               
   
               
-          <p><textarea disabled value={JSON.stringify(this.state.contentState, null, 4)} /></p>
+          {/* <p><textarea disabled value={JSON.stringify(contentState1, null, 4)} /></p> */}
           
-          <p><textarea disabled value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}/></p>
+          {/* <p><textarea disabled value={draftToHtml(convertToRaw(description.getCurrentContent()))}/></p> */}
   
             
           <div className="form-group col-sm-12 text-right">
           <div className='footer-editor'>        
              <Button icon="pi pi-download" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
-             <Button label="Save" className="p-button-raised p-button-danger p-button-text" />
+             <Button label="Save as Draft" className="p-button-raised p-button-danger p-button-text" />
              <Link to="/View"><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
           </div>
           </div>  

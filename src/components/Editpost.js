@@ -4,9 +4,9 @@ import { EditorState, convertToRaw, ContentState,convertFromHTML,convertFromRaw,
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { useNavigate } from "react-router-dom";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -21,10 +21,24 @@ function Editpost({
   console.log(typeof sendTitle)
   console.log(sendTitle)
   console.log(typeof sendDescription)
-  console.log(sendDescription.toString())
+  console.log(sendDescription)
+
+
+      let html = sendDescription.toString();
+      let contentBlock = htmlToDraft(html);
+      let contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      let editorState1 = EditorState.createWithContent(contentState)
+      let editorState = EditorState.moveFocusToEnd(editorState1);
+      console.log(editorState)
+  
+      let [description, setDescription] = useState(editorState);
+      let onEditorStateChange = (editorState) => {
+        setDescription(editorState);
+      }
 
   const [userInfo, setuserInfo] = useState({
-    title: sendTitle
+    title: sendTitle,
+    description: editorState,
   });
   
   const onChangeValue = (e) => {
@@ -34,19 +48,13 @@ function Editpost({
     });
   } 
 
+  // const ondescription = (editorState) => {
+  //   setuserInfo({ 
+  //     ...userInfo,
+  //     description: editorState,
+  //   });
+  // } 
 
-    let html = sendDescription.toString();
- 
-    let contentBlock = htmlToDraft(html);
-    let contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-    let editorState1 = EditorState.createWithContent(contentState,null);
-    let editorState = EditorState.moveFocusToEnd(editorState1);
-
-  // let editorState = EditorState.createEmpty();
-  let [description, setDescription] = useState(editorState);
-  const onEditorStateChange = (editorState) => {
-    setDescription(editorState);
-  }
 
   // Json Format
     const [contentState1, setContenState1] = useState(ContentState)
@@ -56,9 +64,9 @@ function Editpost({
       };
   
 
-    const updateDetails = async (event) => {
-      event.preventDefault();
-      event.persist();
+    const updateDetails = async (e) => {
+      e.preventDefault();
+      e.persist();
       console.log({
         title: userInfo.title,
         description: userInfo.description.value,
@@ -99,15 +107,17 @@ return (
             <div className="form-row">
               <div className="form-group col-md-12">
                 <label className="font-weight-bold"> Title <span className="required"> * </span> </label>
-                <input type="text" name="title" value={userInfo.title} onChange={onChangeValue} className="form-control" placeholder="Title" required />
+                <input type="text" name="title" value={sendTitle} onChange={onChangeValue} className="form-control" placeholder="Title" required />
               </div>
               <div className="form-group col-md-12 editor">
                 <label className="font-weight-bold"> Description <span className="required"> * </span> </label>
                 <Card style={{minHeight:"320px"}}>
                   <Editor
-                    // defaultEditorState={description}
-                    editorState={editorState}
-                    // contentState={contentState1}
+                    defaultEditorState={editorState}
+                    editorState={description}
+                    value={editorState}
+                    // // onChange={ondescription}
+                    // contentState={contentState1}                    
                     onEditorStateChange={onEditorStateChange}
                     toolbarClassName="toolbarClassName"
                     wrapperClassName="wrapperClassName"
@@ -125,7 +135,7 @@ return (
                       { text: 'HONEYDEW', value: 'honeydew', url: 'honeydew' },
                     ],}}
                   />
-                {/* <textarea style={{display:'none'}} disabled ref={(val) => userInfo.description = val} value={draftToHtml(convertToRaw(description.getCurrentContent())) } /> */}
+                <textarea style={{display:'none'}} disabled ref={(val) => userInfo.description = val} value={draftToHtml(convertToRaw(description.getCurrentContent())) } />
                 </Card>
               </div><br />
               
