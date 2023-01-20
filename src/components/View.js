@@ -2,31 +2,33 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
+import { useParams } from "react-router-dom";
+import Download from './Download';
+
 
 
 const View = () => {
-  const [users, setUser] = useState([]);
-  console.log(users)
-  const [isPost, setPost] = useState([]);
 
   useEffect(() => {
-    getUsers();
+    getUserById();
   }, []);
 
-  const getUsers = async () => {
-    const response = await axios.get("http://localhost:5000/users");
-    setUser(response.data);
-    setPost(response.data.slice(-1));
-    console.log(response.data)
-    
-  };
+  let { id } = useParams(); 
+  const [isPost, setPost] = useState([]);
+  
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+ 
 
-  const getLastPost = () => {
-    let arry = users;
-    let lastElement = arry.slice(-1);;
-    console.log(lastElement);
+  const getUserById = async () => {
+    const response = await axios.get(`http://localhost:5000/posts/${id}`);
+    setPost(response.data);
+    setTitle(response.data.title);
+    setDescription(JSON.parse(response.data.description));
 
   }
+
 
   return (
    
@@ -38,15 +40,18 @@ const View = () => {
         <br /><br />
 
         <Card>
-        {isPost.map((item,index) => ( 
-                    <div className="post__list" key={index}>
-                        <h2>Title: {item.title}</h2>
+        
+                    <div className="post__list">
+                        <h2 className="title_View">Title: {title}</h2>
 
-                        <div className="post__description" dangerouslySetInnerHTML={{ __html:JSON.parse(item.description)}}  />
+                        <div className="post__description" dangerouslySetInnerHTML={{ __html: description }}  />
                         <br /><br />
-                        <Link to={`/Edit/${item.id}`} className="btn btn__theme"> Edit </Link>
+                        <div className='footer-editor'>   
+                        <Link to={`/Edit/${isPost.id}`} className="btn btn__theme"> Edit </Link>
+                        <Button icon="pi pi-download" className="p-button-rounded p-button-secondary"  onClick={() => Download(isPost.id,description)} aria-label="Bookmark" />
+
+                        </div>
                     </div>
-                    ))}
         </Card>
       </div>
     </div>

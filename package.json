@@ -17,6 +17,8 @@
     "draft-js-import-html": "^1.4.1",
     "draft-js-import-markdown": "^1.4.1",
     "draftjs-to-html": "^0.9.1",
+    "file-saver": "^2.0.5",
+    "html-react-parser": "^3.0.8",
     "js-file-download": "^0.4.12",
     "primeicons": "^6.0.1",
     "primereact": "^8.7.3",

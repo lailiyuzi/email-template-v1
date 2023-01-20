@@ -13,7 +13,7 @@ function Home() {
   const [ispost, setpost] = useState([]);
   const viewPost = async() =>{
     try {
-      await axios.get(`http://localhost:5000/users`,)
+      await axios.get(`http://localhost:5000/posts`,)
       .then(res => { 
         if(res.data.success === true){
           setpost(res.data);

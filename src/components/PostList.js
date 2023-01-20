@@ -11,13 +11,13 @@ const PostList = () => {
   }, []);
 
   const getUsers = async () => {
-    const response = await axios.get("http://localhost:5000/users");
+    const response = await axios.get("http://localhost:5000/posts");
     setUser(response.data);
   };
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/users/${id}`);
+      await axios.delete(`http://localhost:5000/posts/${id}`);
       getUsers();
     } catch (error) {
       console.log(error);
@@ -46,7 +46,16 @@ const PostList = () => {
             {users.map((user, index) => (
               <tr key={user.id}>
                 <td>{index + 1}</td>
-                <td>{user.title}</td>
+
+                <td>
+                <Link
+                    to={`/View/${user.id}`}
+                    className="postList_title"
+                  >
+                  {user.title}
+                  </Link>
+                  </td>
+                
                 <td>
                   <Link
                     to={`/Edit/${user.id}`}

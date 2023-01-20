@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-import Editpost from './Editpost';
 import { useParams } from "react-router-dom";
 import EditPosting from './EditPosting';
 
@@ -24,8 +23,7 @@ const Edit = () => {
 
 
       const getUserById = async () => {
-        console.log("nowView")
-        const response = await axios.get(`http://localhost:5000/users/${id}`);
+        const response = await axios.get(`http://localhost:5000/posts/${id}`);
         setpostId(response.data);
         setTitle(response.data.title);
         setDescription(JSON.parse(response.data.description));

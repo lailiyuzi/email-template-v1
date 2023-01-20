@@ -125,3 +125,16 @@ form.update__forms {
   margin-left: 30%;
 }
 
+.title_View {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  font-family: 'Inter';
+}
+
+.postList_title {
+  color: #0a0a0a;
+  cursor: revert;
+  text-decoration: none;
+}

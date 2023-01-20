@@ -1,30 +1,23 @@
-import React,{useState} from 'react';
-import { EditorState, convertToRaw, convertFromRaw, ContentState} from 'draft-js';
+import React,{useState,useRef} from 'react';
+import axios from 'axios';
+import { EditorState, convertToRaw, ContentState} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 import 'draft-js/dist/Draft.css';
-import { useNavigate } from "react-router-dom";
+import './editor.css';
+import { Link} from "react-router-dom";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-import './editor.css';
-import axios from 'axios';
-import {Link } from "react-router-dom";
+import { Toast } from 'primereact/toast';
 import PostList from './PostList';
 
 
-
-const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
-
 const Add = () => {
 
-  let history = useNavigate();
-  const [id, setId] = useState();
+  const toast = useRef(null);
 
-
-  
    // Json Format
   const [contentState1, setContenState1] = useState(ContentState)
     
@@ -50,6 +43,12 @@ const Add = () => {
     setDescription(editorState);
   }
 
+
+  const save = () => {
+    toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+}
+
+
   
   const addDetails = async (event) => {
     event.preventDefault();
@@ -64,14 +63,10 @@ const Add = () => {
     }
 
       try {
-        axios.post('http://localhost:5000/users', results).then(res => {
-          if(res.success === true){
-            // history('/PostList');
-          }
-        }).then((res) => {
+        axios.post('http://localhost:5000/posts', results).then((res) => {
           console.log("success");
-          setId(res.data);
-        });
+          
+        })
       }
        catch (error) {
         console.log(error);
@@ -87,16 +82,11 @@ const Add = () => {
       
 return ( 
 <>
+<Toast ref={toast}></Toast>
 
   <div className="App"> 
       <div className="container">
       <div className="row"> 
-      
-      {/* <div className="cursor-pointer flex align-items-end">
-        
-      <img src="https://codebridge.my/static/media/cb-logo.3d7cfc27.svg" height="30" className="mb-1" />
-      <h3 className="text-header">CodeBridge<span className="text-sm ml-1">studio</span></h3>
-      </div> */}
 
       <Card style={{minHeight:"320px"}}>
         <form onSubmit={addDetails} className="update__forms">
@@ -141,10 +131,9 @@ return (
 
           
         <div className="form-group col-sm-12 text-right">
-        <div className='footer-editor'>        
-           <Button icon="pi pi-download" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
-           <Button label="Save as Draft" className="p-button-raised p-button-danger p-button-text" />
-           <Link to="/View"><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
+        <div className='footer-editor'>                   
+           <Button label="Save as Draft" onClick={save} className="p-button-raised p-button-danger p-button-text" />
+           <Link to={`/ViewLast`}><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
         </div>
         </div>  
 

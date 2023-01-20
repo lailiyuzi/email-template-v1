@@ -9,7 +9,7 @@ import "react-quill/dist/quill.snow.css";
 import './App.css';
 
 
-import {Add,Edit,Home, PostList,View,EditPosting} from "./components";
+import {Add,Edit,Home, PostList,View,EditPosting,ViewLast} from "./components";
 function App() {
   return (
     <div>
@@ -17,12 +17,11 @@ function App() {
       <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/Add" element={<Add />} />
-          <Route path="/Edit/:id" element={<Edit />}/>
-          <Route path="/PostList" element={<PostList />}/>
-          <Route path="/View" element={<View />}/>
-          {/* <Route path="/View/Edit/:id" element={<Edit />}/> */}
-
           <Route path="/EditPosting/:id" element={<EditPosting />}/>
+          <Route path="/PostList" element={<PostList />}/>
+          <Route path="/View/:id" element={<View />}/>
+          <Route path="/ViewLast" element={<ViewLast />}/>
+
 
 
       </Routes>

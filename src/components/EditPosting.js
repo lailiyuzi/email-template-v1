@@ -6,6 +6,7 @@ import htmlToDraft from 'html-to-draftjs';
 import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import { Toast } from 'primereact/toast';
 import './editor.css';
 import axios from 'axios';
 import {Link } from "react-router-dom";
@@ -21,6 +22,7 @@ class EditPosting extends Component {
                   title: props.sendTitle,
                   description: ""
                 }
+    this.save = this.save.bind(this);
 
   }
 
@@ -34,6 +36,9 @@ class EditPosting extends Component {
     }
 }
 
+save() {
+  this.toast.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+}
 
 onChange = (e) =>{
   this.setState({title: e.target.value});
@@ -65,7 +70,7 @@ updateDetails = async (e) => {
   console.log(this.props.editPostID)
 
     try {
-      axios.patch(`http://localhost:5000/users/${id}`, results).then(res => {
+      axios.patch(`http://localhost:5000/posts/${id}`, results).then(res => {
         if(res.success === true){
           console.log("success");
         }
@@ -83,6 +88,7 @@ updateDetails = async (e) => {
     const { editorState } = this.state;
     return (
       <div>
+         <Toast ref={(el) => this.toast = el}></Toast>
         <div className="App"> 
         <div className="container">
         <div className="row"> 
@@ -107,6 +113,17 @@ updateDetails = async (e) => {
                   editorClassName="demo-editor"
                   onEditorStateChange={this.onEditorStateChange}
                   onContentStateChange={this.onContentStateChange}
+                  mention={{ separator: ' ', trigger: '@', 
+                  suggestions: [
+                    { text: 'APPLE', value: 'apple', url: 'apple' },
+                    { text: 'BANANA', value: 'banana', url: 'banana' },
+                    { text: 'CHERRY', value: 'cherry', url: 'cherry' },
+                    { text: 'DURIAN', value: 'durian', url: 'durian' },
+                    { text: 'EGGFRUIT', value: 'eggfruit', url: 'eggfruit' },
+                    { text: 'FIG', value: 'fig', url: 'fig' },
+                    { text: 'GRAPEFRUIT', value: 'grapefruit', url: 'grapefruit' },
+                    { text: 'HONEYDEW', value: 'honeydew', url: 'honeydew' },
+                  ],}}
                 />
 
                 <textarea style={{display:'none'}} disabled ref={(val) => this.description = val} value={draftToHtml(editorState.getCurrentContent()) } />
@@ -122,10 +139,9 @@ updateDetails = async (e) => {
   
             
           <div className="form-group col-sm-12 text-right">
-          <div className='footer-editor'>        
-             <Button icon="pi pi-download" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
-             <Button label="Save" className="p-button-raised p-button-danger p-button-text" />
-             <Link to="/View"><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
+          <div className='footer-editor'> 
+             <Button label="Save" onClick={this.save} className="p-button-raised p-button-danger p-button-text" />
+             <Link to={`/View/${this.props.editPostID}`}><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
           </div>
           </div>  
   
