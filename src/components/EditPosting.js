@@ -10,7 +10,6 @@ import { Toast } from 'primereact/toast';
 import './editor.css';
 import axios from 'axios';
 import {Link } from "react-router-dom";
-import PostList from './PostList';
 
 
 
@@ -93,7 +92,7 @@ updateDetails = async (e) => {
         <div className="container">
         <div className="row"> 
 
-  
+        <br /> <br />
         <Card style={{minHeight:"320px"}}>
           <form onSubmit={this.updateDetails} className="update__forms">
             
@@ -149,7 +148,7 @@ updateDetails = async (e) => {
           </form>
           </Card>
           </div>
-                  <PostList />
+                
         </div>
       </div>
       </div>

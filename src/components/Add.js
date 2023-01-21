@@ -11,7 +11,6 @@ import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
-import PostList from './PostList';
 
 
 const Add = () => {
@@ -87,6 +86,7 @@ return (
   <div className="App"> 
       <div className="container">
       <div className="row"> 
+      <br /> <br />
 
       <Card style={{minHeight:"320px"}}>
         <form onSubmit={addDetails} className="update__forms">
@@ -132,7 +132,7 @@ return (
           
         <div className="form-group col-sm-12 text-right">
         <div className='footer-editor'>                   
-           <Button label="Save as Draft" onClick={save} className="p-button-raised p-button-danger p-button-text" />
+           <Button label="Save" onClick={save} className="p-button-raised p-button-danger p-button-text" />
            <Link to={`/ViewLast`}><Button label="Save & View" className="p-button-danger" type="submit" /> </Link>
         </div>
         </div>  
@@ -141,7 +141,7 @@ return (
         </form>
         </Card>
         </div>
-                <PostList />
+                
       </div>
     </div>
  

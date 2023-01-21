@@ -20,6 +20,7 @@
     "file-saver": "^2.0.5",
     "html-react-parser": "^3.0.8",
     "js-file-download": "^0.4.12",
+    "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^8.7.3",
     "react": "^18.2.0",

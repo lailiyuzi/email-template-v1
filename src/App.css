@@ -70,7 +70,7 @@ label {
   float: left;
   width: 100%;
   display: block;
-  padding: 70px 0;
+  /* padding: 70px 0; */
 }
 .App h1 {
   text-align: center;
@@ -137,4 +137,20 @@ form.update__forms {
   color: #0a0a0a;
   cursor: revert;
   text-decoration: none;
+}
+
+.p-button {
+  color: #ffffff;
+  background: #f14668;
+  border: 1px solid #f14668;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+}
+
+.p-button.p-button-outlined {
+  background-color: transparent;
+  color: #f14668;
+  border: 1px solid;
 }

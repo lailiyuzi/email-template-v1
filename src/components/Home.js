@@ -2,6 +2,9 @@ import React,{useState,useEffect} from 'react';
 import {Link } from "react-router-dom";
 import axios from 'axios';
 import PostList from './PostList';
+import { Button } from 'primereact/button';
+import "primeflex/primeflex.css";
+import AppTopbar from '../AppTopbar';
 
 
 function Home() {
@@ -25,27 +28,30 @@ function Home() {
   return (
   <div className="App">
     <div className="container">
-      <div className="row">
-        <h1> Email Template <span> wysiwyg </span> Editor </h1><br />
-        <img className='sticker' src="/animation.png" alt="animation"/>
-        <Link to="/Add" className="btn btn__theme btn__add"> Create New </Link>
 
-        {ispost.map((item,index) => ( 
-          <div className="post__list" key={index}>
-            <h2>{item.title}</h2>
+    <div className="grid grid-nogutter surface-0 text-800">
+    <div className="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+        <section>
+            <span className="block text-6xl font-bold mb-1">Create the screens</span>
+            <div className="text-6xl font-bold mb-3" style={{color:'#f14668'}}>your visitors deserve to see</div>
+            <p className="mt-0 mb-4 text-700 line-height-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-            <div className="post__description" dangerouslySetInnerHTML={{ __html: item.description}}  />
-            <Link to={`/Edit/${item.id}`} className="btn btn__theme"> Edit </Link>
-
-          </div>
-        ))}
-
-        <PostList />
-        
-      </div>
+            
+            <Link to="/Add"><Button className="mr-3 p-button-raised"> Create New </Button></Link>
+            <Link to="/PostList" type="button"><Button  className="p-button-outlined">Post List</Button></Link>
+        </section>
+    </div>
+    <div className="col-12 md:col-6 overflow-hidden">
+      <br /><br />
+        <img src="/animation.png" alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }} />
+    </div>
+</div>
     </div>
   </div>
   );
 }
 
 export default Home;
+
+
+    
